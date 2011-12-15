@@ -6,7 +6,7 @@ class Array
     attributes = self.first.attributes.keys.sort.map(&:to_sym)
 
     if options[:only]
-      columns = Array(options[:only]) & attributes
+      columns = Array(options[:only]).select{|c| self.first.respond_to?(c)}
     else
       columns = attributes - Array(options[:except])
     end
